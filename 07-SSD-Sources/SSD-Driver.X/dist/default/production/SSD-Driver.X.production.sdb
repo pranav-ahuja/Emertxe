@@ -1,0 +1,60 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"10 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\07-SSD-Sources\SSD-Driver.X\main.c
+[v _init_config init_config `(v  1 s 1 init_config ]
+"14
+[v _main main `(v  1 e 1 0 ]
+"4 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\07-SSD-Sources\SSD-Driver.X\ssd.c
+[v _init_ssd init_ssd `(v  1 e 1 0 ]
+"15
+[v _display display `(v  1 e 1 0 ]
+"166 C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic16f877a.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"340
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"1325
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"14 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\07-SSD-Sources\SSD-Driver.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"15
+[v main@ssd ssd `[4]uc  1 a 4 10 ]
+"28
+} 0
+"10
+[v _init_config init_config `(v  1 s 1 init_config ]
+{
+"12
+} 0
+"4 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\07-SSD-Sources\SSD-Driver.X\ssd.c
+[v _init_ssd init_ssd `(v  1 e 1 0 ]
+{
+"13
+} 0
+"15
+[v _display display `(v  1 e 1 0 ]
+{
+[v display@data data `*.1uc  1 a 1 wreg ]
+"24
+[v display@wait wait `ul  1 a 4 4 ]
+"17
+[v display@digit digit `uc  1 a 1 9 ]
+"15
+[v display@data data `*.1uc  1 a 1 wreg ]
+"19
+[v display@data data `*.1uc  1 a 1 8 ]
+"26
+} 0

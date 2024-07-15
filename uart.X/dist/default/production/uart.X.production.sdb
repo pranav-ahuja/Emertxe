@@ -1,0 +1,113 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"10 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\isr.c
+[v _isr isr `II(v  1 e 1 0 ]
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\main.c
+[v _init_config init_config `(v  1 s 1 init_config ]
+"26
+[v _main main `(v  1 e 1 0 ]
+"10 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\uart.c
+[v _init_uart init_uart `(v  1 e 1 0 ]
+"40
+[v _putchar putchar `(v  1 e 1 0 ]
+"49
+[v _puts puts `(v  1 e 1 0 ]
+"1059 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f877a.h
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1066
+[v _RCREG RCREG `VEuc  1 e 1 @26 ]
+"1375
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"2080
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2420
+[v _BRGH BRGH `VEb  1 e 0 @1218 ]
+"2519
+[v _CREN CREN `VEb  1 e 0 @196 ]
+"2573
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"2618
+[v _OERR OERR `VEb  1 e 0 @193 ]
+"2633
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"2744
+[v _RCIE RCIE `VEb  1 e 0 @1125 ]
+"2747
+[v _RCIF RCIF `VEb  1 e 0 @101 ]
+"2756
+[v _RD1 RD1 `VEb  1 e 0 @65 ]
+"2816
+[v _SPEN SPEN `VEb  1 e 0 @199 ]
+"3035
+[v _TXEN TXEN `VEb  1 e 0 @1221 ]
+"3041
+[v _TXIF TXIF `VEb  1 e 0 @100 ]
+"11 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\main.c
+[v _ch ch `uc  1 e 1 0 ]
+"26
+[v _main main `(v  1 e 1 0 ]
+{
+"28
+[v main@wait wait `ul  1 a 4 13 ]
+"48
+} 0
+"12
+[v _init_config init_config `(v  1 s 1 init_config ]
+{
+"24
+} 0
+"49 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\uart.c
+[v _puts puts `(v  1 e 1 0 ]
+{
+[v puts@str str `*.24DCuc  1 a 1 wreg ]
+[v puts@str str `*.24DCuc  1 a 1 wreg ]
+[v puts@str str `*.24DCuc  1 a 1 3 ]
+"55
+} 0
+"40
+[v _putchar putchar `(v  1 e 1 0 ]
+{
+[v putchar@ch ch `uc  1 a 1 wreg ]
+[v putchar@ch ch `uc  1 a 1 wreg ]
+"42
+[v putchar@ch ch `uc  1 a 1 2 ]
+"47
+} 0
+"10
+[v _init_uart init_uart `(v  1 e 1 0 ]
+{
+[v init_uart@baud_rate baud_rate `ul  1 p 4 5 ]
+"29
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 0 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 4 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 2 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 6 ]
+"30
+} 0
+"10 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\uart.X\isr.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"20
+} 0

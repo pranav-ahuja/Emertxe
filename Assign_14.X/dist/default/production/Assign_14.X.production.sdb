@@ -1,0 +1,253 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\AT24C04.c
+[v _init_AT24C04 init_AT24C04 `(v  1 e 1 0 ]
+"21
+[v _read_AT24C04 read_AT24C04 `(uc  1 e 1 0 ]
+"36
+[v _write_AT24C04 write_AT24C04 `(v  1 e 1 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"13 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\digital_keypad.c
+[v _init_digital_keypad init_digital_keypad `(v  1 e 1 0 ]
+"19
+[v _read_digital_keypad read_digital_keypad `(uc  1 e 1 0 ]
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\i2c.c
+[v _init_i2c init_i2c `(v  1 e 1 0 ]
+"24
+[v _i2c_wait_for_idle i2c_wait_for_idle `(v  1 s 1 i2c_wait_for_idle ]
+"30
+[v _i2c_start i2c_start `(v  1 e 1 0 ]
+"36
+[v _i2c_rep_start i2c_rep_start `(v  1 e 1 0 ]
+"42
+[v _i2c_stop i2c_stop `(v  1 e 1 0 ]
+"48
+[v _i2c_read i2c_read `(uc  1 e 1 0 ]
+"72
+[v _i2c_write i2c_write `(i  1 e 2 0 ]
+"17 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\main.c
+[v _init_config init_config `(v  1 e 1 0 ]
+"26
+[v _main main `(v  1 e 1 0 ]
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\ssd.c
+[v _init_ssd init_ssd `(v  1 e 1 0 ]
+"23
+[v _display display `(v  1 e 1 0 ]
+"166 C:\Program Files\Microchip\xc8\v2.45\pic\include\proc\pic16f877a.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+"216
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"340
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"808
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"1325
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1375
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1754
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @145 ]
+"1823
+[v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
+"2378
+[v _ACKDT ACKDT `VEb  1 e 0 @1165 ]
+"2381
+[v _ACKEN ACKEN `VEb  1 e 0 @1164 ]
+"2384
+[v _ACKSTAT ACKSTAT `VEb  1 e 0 @1166 ]
+"2636
+[v _PEN PEN `VEb  1 e 0 @1162 ]
+"2741
+[v _RCEN RCEN `VEb  1 e 0 @1163 ]
+"2795
+[v _RSEN RSEN `VEb  1 e 0 @1161 ]
+"2807
+[v _R_nW R_nW `VEb  1 e 0 @1186 ]
+"2810
+[v _SEN SEN `VEb  1 e 0 @1160 ]
+"2822
+[v _SSPEN SSPEN `VEb  1 e 0 @165 ]
+"2840
+[v _SSPM3 SSPM3 `VEb  1 e 0 @163 ]
+"11 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\digital_keypad.c
+[v _count count `i  1 s 2 count ]
+"26 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"32
+[v main@key key `uc  1 a 1 13 ]
+"29
+[v main@ssd ssd `[4]uc  1 s 4 ssd ]
+"30
+[v main@digit digit `[12]uc  1 s 12 digit ]
+"31
+[v main@count count `ul  1 s 4 count ]
+[v main@flag flag `ul  1 s 4 flag ]
+"85
+} 0
+"19 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\digital_keypad.c
+[v _read_digital_keypad read_digital_keypad `(uc  1 e 1 0 ]
+{
+[v read_digital_keypad@mode mode `uc  1 a 1 wreg ]
+[v read_digital_keypad@mode mode `uc  1 a 1 wreg ]
+"21
+[v read_digital_keypad@once once `uc  1 s 1 once ]
+"23
+[v read_digital_keypad@mode mode `uc  1 a 1 1 ]
+"52
+} 0
+"17 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\main.c
+[v _init_config init_config `(v  1 e 1 0 ]
+{
+"23
+} 0
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\ssd.c
+[v _init_ssd init_ssd `(v  1 e 1 0 ]
+{
+"21
+} 0
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\i2c.c
+[v _init_i2c init_i2c `(v  1 e 1 0 ]
+{
+[v init_i2c@baud baud `ul  1 p 4 13 ]
+"22
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 8 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 12 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
+"13 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\digital_keypad.c
+[v _init_digital_keypad init_digital_keypad `(v  1 e 1 0 ]
+{
+"17
+} 0
+"12 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\AT24C04.c
+[v _init_AT24C04 init_AT24C04 `(v  1 e 1 0 ]
+{
+"14
+[v init_AT24C04@dummy dummy `uc  1 a 1 12 ]
+"19
+} 0
+"36
+[v _write_AT24C04 write_AT24C04 `(v  1 e 1 0 ]
+{
+[v write_AT24C04@addr addr `uc  1 a 1 wreg ]
+[v write_AT24C04@addr addr `uc  1 a 1 wreg ]
+[v write_AT24C04@data data `uc  1 p 1 13 ]
+"38
+[v write_AT24C04@addr addr `uc  1 a 1 11 ]
+"43
+} 0
+"21
+[v _read_AT24C04 read_AT24C04 `(uc  1 e 1 0 ]
+{
+[v read_AT24C04@addr addr `uc  1 a 1 wreg ]
+"23
+[v read_AT24C04@data data `uc  1 a 1 3 ]
+"21
+[v read_AT24C04@addr addr `uc  1 a 1 wreg ]
+"25
+[v read_AT24C04@addr addr `uc  1 a 1 2 ]
+"34
+} 0
+"72 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\i2c.c
+[v _i2c_write i2c_write `(i  1 e 2 0 ]
+{
+[v i2c_write@data data `uc  1 a 1 wreg ]
+[v i2c_write@data data `uc  1 a 1 wreg ]
+"74
+[v i2c_write@data data `uc  1 a 1 0 ]
+"78
+} 0
+"42
+[v _i2c_stop i2c_stop `(v  1 e 1 0 ]
+{
+"46
+} 0
+"30
+[v _i2c_start i2c_start `(v  1 e 1 0 ]
+{
+"34
+} 0
+"36
+[v _i2c_rep_start i2c_rep_start `(v  1 e 1 0 ]
+{
+"40
+} 0
+"48
+[v _i2c_read i2c_read `(uc  1 e 1 0 ]
+{
+[v i2c_read@ack ack `uc  1 a 1 wreg ]
+"50
+[v i2c_read@data data `uc  1 a 1 1 ]
+"48
+[v i2c_read@ack ack `uc  1 a 1 wreg ]
+"52
+[v i2c_read@ack ack `uc  1 a 1 0 ]
+"70
+} 0
+"24
+[v _i2c_wait_for_idle i2c_wait_for_idle `(v  1 s 1 i2c_wait_for_idle ]
+{
+"28
+} 0
+"23 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\Assign_14.X\ssd.c
+[v _display display `(v  1 e 1 0 ]
+{
+[v display@data data `*.4uc  1 a 1 wreg ]
+"32
+[v display@wait wait `ul  1 a 4 4 ]
+"25
+[v display@digit digit `uc  1 a 1 9 ]
+"23
+[v display@data data `*.4uc  1 a 1 wreg ]
+"27
+[v display@data data `*.4uc  1 a 1 8 ]
+"34
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 8 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 4 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 6 ]
+"53
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\llmod.c
+[v ___llmod __llmod `(ul  1 e 4 0 ]
+{
+"10
+[v ___llmod@counter counter `uc  1 a 1 9 ]
+"5
+[v ___llmod@divisor divisor `ul  1 p 4 0 ]
+[v ___llmod@dividend dividend `ul  1 p 4 4 ]
+"25
+} 0

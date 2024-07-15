@@ -1,0 +1,124 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"18 ./AT24C04.h
+[; ;./AT24C04.h: 18: unsigned char read_AT24C04(unsigned char addr);
+[v _read_AT24C04 `(uc ~T0 @X0 0 ef1`uc ]
+"19
+[; ;./AT24C04.h: 19: void write_AT24C04(unsigned char addr, unsigned char data);
+[v _write_AT24C04 `(v ~T0 @X0 0 ef2`uc`uc ]
+"15 ./i2c.h
+[; ;./i2c.h: 15: void i2c_start(void);
+[v _i2c_start `(v ~T0 @X0 0 ef ]
+"19
+[; ;./i2c.h: 19: int i2c_write(unsigned char data);
+[v _i2c_write `(i ~T0 @X0 0 ef1`uc ]
+"16
+[; ;./i2c.h: 16: void i2c_rep_start(void);
+[v _i2c_rep_start `(v ~T0 @X0 0 ef ]
+"18
+[; ;./i2c.h: 18: unsigned char i2c_read(unsigned char ack);
+[v _i2c_read `(uc ~T0 @X0 0 ef1`uc ]
+"17
+[; ;./i2c.h: 17: void i2c_stop(void);
+[v _i2c_stop `(v ~T0 @X0 0 ef ]
+"12 AT24C04.c
+[; ;AT24C04.c: 12: void init_AT24C04(void)
+[v _init_AT24C04 `(v ~T0 @X0 1 ef ]
+"13
+[; ;AT24C04.c: 13: {
+{
+[e :U _init_AT24C04 ]
+[f ]
+"14
+[; ;AT24C04.c: 14:     unsigned char dummy;
+[v _dummy `uc ~T0 @X0 1 a ]
+"16
+[; ;AT24C04.c: 16:     dummy = read_AT24C04(0x00);
+[e = _dummy ( _read_AT24C04 (1 -> -> 0 `i `uc ]
+"17
+[; ;AT24C04.c: 17:     dummy = dummy & 0x7F;
+[e = _dummy -> & -> _dummy `i -> 127 `i `uc ]
+"18
+[; ;AT24C04.c: 18:     write_AT24C04(0x00, dummy);
+[e ( _write_AT24C04 (2 , -> -> 0 `i `uc _dummy ]
+"19
+[; ;AT24C04.c: 19: }
+[e :UE 1 ]
+}
+"21
+[; ;AT24C04.c: 21: unsigned char read_AT24C04(unsigned char addr)
+[v _read_AT24C04 `(uc ~T0 @X0 1 ef1`uc ]
+"22
+[; ;AT24C04.c: 22: {
+{
+[e :U _read_AT24C04 ]
+"21
+[; ;AT24C04.c: 21: unsigned char read_AT24C04(unsigned char addr)
+[v _addr `uc ~T0 @X0 1 r1 ]
+"22
+[; ;AT24C04.c: 22: {
+[f ]
+"23
+[; ;AT24C04.c: 23:     unsigned char data;
+[v _data `uc ~T0 @X0 1 a ]
+"25
+[; ;AT24C04.c: 25:     i2c_start();
+[e ( _i2c_start ..  ]
+"26
+[; ;AT24C04.c: 26:     i2c_write(0b10100000);
+[e ( _i2c_write (1 -> -> 160 `i `uc ]
+"27
+[; ;AT24C04.c: 27:     i2c_write(addr);
+[e ( _i2c_write (1 _addr ]
+"28
+[; ;AT24C04.c: 28:     i2c_rep_start();
+[e ( _i2c_rep_start ..  ]
+"29
+[; ;AT24C04.c: 29:     i2c_write(0b10100001);
+[e ( _i2c_write (1 -> -> 161 `i `uc ]
+"30
+[; ;AT24C04.c: 30:     data = i2c_read(0);
+[e = _data ( _i2c_read (1 -> -> 0 `i `uc ]
+"31
+[; ;AT24C04.c: 31:     i2c_stop();
+[e ( _i2c_stop ..  ]
+"33
+[; ;AT24C04.c: 33:     return data;
+[e ) _data ]
+[e $UE 2  ]
+"34
+[; ;AT24C04.c: 34: }
+[e :UE 2 ]
+}
+"36
+[; ;AT24C04.c: 36: void write_AT24C04(unsigned char addr, unsigned char data)
+[v _write_AT24C04 `(v ~T0 @X0 1 ef2`uc`uc ]
+"37
+[; ;AT24C04.c: 37: {
+{
+[e :U _write_AT24C04 ]
+"36
+[; ;AT24C04.c: 36: void write_AT24C04(unsigned char addr, unsigned char data)
+[v _addr `uc ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+"37
+[; ;AT24C04.c: 37: {
+[f ]
+"38
+[; ;AT24C04.c: 38:     i2c_start();
+[e ( _i2c_start ..  ]
+"39
+[; ;AT24C04.c: 39:     i2c_write(0b10100000);
+[e ( _i2c_write (1 -> -> 160 `i `uc ]
+"40
+[; ;AT24C04.c: 40:     i2c_write(addr);
+[e ( _i2c_write (1 _addr ]
+"41
+[; ;AT24C04.c: 41:     i2c_write(data);
+[e ( _i2c_write (1 _data ]
+"42
+[; ;AT24C04.c: 42:     i2c_stop();
+[e ( _i2c_stop ..  ]
+"43
+[; ;AT24C04.c: 43: }
+[e :UE 3 ]
+}

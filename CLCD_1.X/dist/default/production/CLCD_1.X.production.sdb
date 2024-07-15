@@ -1,0 +1,89 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.45\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"11 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\CLCD_1.X\clcd.c
+[v _init_clcd init_clcd `(v  1 e 1 0 ]
+"21
+[v _init_display_controller init_display_controller `(v  1 s 1 init_display_controller ]
+"50
+[v _clcd_write clcd_write `(v  1 s 1 clcd_write ]
+"66
+[v _clcd_putch clcd_putch `(v  1 e 1 0 ]
+"73
+[v _clcd_print clcd_print `(v  1 e 1 0 ]
+"13 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\CLCD_1.X\main.c
+[v _init_config init_config `(v  1 s 1 init_config ]
+"17
+[v _main main `(v  1 e 1 0 ]
+"340 C:/Program Files/Microchip/MPLABX/v6.10/packs/Microchip/PIC16Fxxx_DFP/1.4.149/xc8\pic\include\proc\pic16f877a.h
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"1499
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"2780
+[v _RE1 RE1 `VEb  1 e 0 @73 ]
+"2783
+[v _RE2 RE2 `VEb  1 e 0 @74 ]
+"3014
+[v _TRISE1 TRISE1 `VEb  1 e 0 @1097 ]
+"3017
+[v _TRISE2 TRISE2 `VEb  1 e 0 @1098 ]
+"17 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\CLCD_1.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"25
+} 0
+"13
+[v _init_config init_config `(v  1 s 1 init_config ]
+{
+"15
+} 0
+"11 C:\Users\Rakesh Ahuja\Desktop\Emertxe MCU\CLCD_1.X\clcd.c
+[v _init_clcd init_clcd `(v  1 e 1 0 ]
+{
+"19
+} 0
+"21
+[v _init_display_controller init_display_controller `(v  1 s 1 init_display_controller ]
+{
+"48
+} 0
+"66
+[v _clcd_putch clcd_putch `(v  1 e 1 0 ]
+{
+[v clcd_putch@data data `uc  1 a 1 wreg ]
+[v clcd_putch@data data `uc  1 a 1 wreg ]
+[v clcd_putch@addr addr `uc  1 p 1 4 ]
+"68
+[v clcd_putch@data data `uc  1 a 1 5 ]
+"71
+} 0
+"73
+[v _clcd_print clcd_print `(v  1 e 1 0 ]
+{
+[v clcd_print@str str `*.24uc  1 a 1 wreg ]
+[v clcd_print@str str `*.24uc  1 a 1 wreg ]
+[v clcd_print@addr addr `uc  1 p 1 4 ]
+"75
+[v clcd_print@str str `*.24uc  1 a 1 5 ]
+"82
+} 0
+"50
+[v _clcd_write clcd_write `(v  1 s 1 clcd_write ]
+{
+[v clcd_write@byte byte `uc  1 a 1 wreg ]
+[v clcd_write@byte byte `uc  1 a 1 wreg ]
+[v clcd_write@mode mode `uc  1 p 1 0 ]
+"52
+[v clcd_write@byte byte `uc  1 a 1 3 ]
+"64
+} 0

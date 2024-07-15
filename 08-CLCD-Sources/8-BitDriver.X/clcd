@@ -1,0 +1,15 @@
+/* 
+ * File:   main.h
+ * Author: Rakesh Ahuja
+ *
+ * Created on October 24, 2023, 4:19 PM
+ */
+
+#ifndef MAIN_H
+#define	MAIN_H
+
+#define LED_ARR     PORTB
+#definr LED_DDR     TRISB
+
+#endif	/* MAIN_H */
+

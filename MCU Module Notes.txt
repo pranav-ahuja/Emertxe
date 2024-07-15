@@ -1,0 +1,1026 @@
+Embedded system: 
+	Hardware + Software + Specific task
+	
+Automatic gate opening system:[High end purely h/w based ]
+		1. Sensor
+		2. Relay
+		3. Actuators[ gate ]
+		4. Comparator
+		5. Timer
+		
+Examples of ES: washing washine, Smart TV
+
+Categories of ES:
+	Standalone ES:
+		-> Slave standalone ES: Semi automatic washing machine , oven
+		-> Independent standalone ES: Fully automatic washing machine, automatic car
+	Real time ES: fire alarm, break system, airbag system, robots
+	Networked ES: Home automation, ATM
+	Mobile ES: Robot, google car, drones
+	Hybrid ES: Google car
+
+SOC: system on chip -> multiple uC or uP
+		Automatic gate opening system: -> Jewellery manufacturing company
+		8am-4pm  4pm-10pm  10pm - 8am
+		security man -> 8am-8pm, 8pm-8am
+		owner
+		1. uC
+		2.Sensor
+		2. Relay
+		3. Actuators[ gate ]
+		4. Comparator
+		5. Timer
+
+Memory:
+	ROM (Read only memory)/ Non - volatile :
+		1. PROM (Programmable ROM) : OTP (One time programmable)
+			Eg: Toy industry
+		2. EPROM (Erasable Programmable ROM ):  UVROM 
+			Eg: R&D department, Research labs
+		3. Masked ROM: Eg: Boot loader
+	RAM (Random access memory)/ Volatile :  
+		1. SRAM: Static RAM  Eg: Cache memory
+		2. DRAM: Dynamic RAM Eg: Main memory
+	Hybrid memory:
+		1. EEPROM:(Electrically Erasable Programmable ROM)
+			writing speed is very slow
+			5msec -> 1 cell(1 bytes) 10 bytes -> 50msec
+			5msec -> 1 page (8 bytes or more)	
+		2. Flash memory: 
+				NOR flash : Less dense. more reliable -> XIP(Execute in place) -> code 
+				NAND flash : More dense , less reliable -> data
+				
+GPS vs ES:
+			System designed to perform multiple task
+			Eg: Computer, Laptops
+			
+	Is mobile a GPS?
+		A system which is used to design an ES is not an ES. It is a GPS
+		A system using which we design an ES is called a GPS.
+		Eg: Computer -> can design ES -> GPS
+			Washing machine -> cannot design ES -> ES
+			Laptop -> can design ES -> GPS
+			Oven -> cannot design ES -> ES
+			Mobile -> can design ES -> CONVINIENCE -> we will not choose mobiles to	
+													design an ES
+			
+				Mobile phone is 95% GPS  5% ES 
+
+Real time ES: Take action in given time (pico - mili sec)
+	Hard Real time ES: Should take the action in the given time. 
+							Failure -> harm the human life
+							Eg: air bags, brake, pace maker
+	Soft Real time ES: Should take the action in the given time.
+						Failures have tolerence
+						Eg: ATM, coffee machines
+	Firm Real time ES: Should take the action in the given time.
+						No human life involved in hard real time ES
+						Eg: robot, missile system
+						
+Host: Sytem used to develope a target [Laptop]
+Target: System being developed for a specific task [PICSIMLAB board - PIC16F877A]
+Cross compiler: compiler -> gcc -> converts a high level language into a machine level language
+					pgm -> laptop 
+					execute ->  uC [PICSIMLAB board]
+					Compiler which converts pgm into a machine level language
+					from one architecture to another architecture is called a
+					cross compiler AVRGCC, XC8 
+					
+#include <stdio.h>
+int main()
+{
+	int x = 20;
+	printf("%d\n", x);
+	return 0;
+}
+
+Bare metal programming: Non - OS based progamming for ES
+
+#include <stdio.h>
+void main( void )
+{
+	int x = 20;
+	printf("%d\n", x);
+}
+
+Any peripheral on the board gets connected to the uC via port pins
+PORTS are the interface b/w external periperals and the uC
+Any information regarding uC -> REFER Datasheet
+To know how the circuit connection on board is being made -> REFER Schematic of board
+
+PIC16F877A: 8 bit - 40 pin - > 5 PORTS -> pins are bidirection
+DDR[Data direction register] -> TRISx -> Tri state -> Input[1] Output[0] High-impendence
+PORTA: 6 - RA0 - RA5
+PORTB: 8 - RB0 - RB7
+PORTC: 8 - RC0 - RC7
+PORTD: 8 - RD0 - RD7
+PORTE: 3 - RE0 - RE2
+
+
+LED:
+
+Pgm to turn on an LED
+Assumption1 : LED written with 1 will turn it on
+Assumption2 : while using LED, the pins have to be treated as output
+
+void main (void)
+{
+	int LED;
+	LED = 1;
+}
+
+Pgm to turn on all 8 LEDs of PORTB
+PORTB  -> 	RB7		RB6		RB5		RB4		RB3		RB2		RB1		RB0
+			1		1		1		1		1		1		1		1	
+TRISB  -> TRISB7	TRISB6 	TRISB5	TRISB4	TRISB3	TRISB2	TRISB1	TRISB0
+			1		1		1		1		1		1		1		1	  
+			TRISB = 0b11111111 -> RB7 - RB0 should be treated as input
+			TRISD7 = 0 RD7 -> Output
+			TRISC = 0xF0 -> 1111 0000 -> rc7 - rc4 Input, RC3 - RC0 -> Output
+void main(void)
+{
+	char PORTB;
+	char TRISB;
+	TRISB = 0x00; RB7 - RB0 treated as output
+	PORTB = 0b11111111;
+}
+
+void main(void)
+{
+	unsigned char *portb = (unsigned char *)0x06;
+	unsigned char *trisb = (unsigned char *)0x86;
+	*trisb = 0x00; RB7 - RB0 treated as output
+	*portb = 0b11111111;
+}
+
+#include <xc.h>
+void main(void)
+{
+	TRISB = 0x00; RB7 - RB0 treated as output
+	PORTB = 0b11111111;
+}
+
+WDT -> watch dog timer -> reset the board on regular interval
+
+
+Toggle LEDs on portb -> all 8 on , all 8 off, all 8 on, all 8 off .........
+
+init_config()
+{
+	TRISB = 0x00; //To set RB0 - RB7 as output
+	PORTB = 0x00; //To turn off all 8 LED
+}
+
+void main(void)
+{
+	init_config()
+	while(1)
+	{
+		PORTB = ~PORTB;//0000 0000  11111111 0000 0000 11111111
+		for(int i = 50000; i-- ; ); //blocking delay 1sec
+		//read a switch -> 10 msec
+	}
+}
+
+void main(void)
+{
+	init_config()
+	unsigned long int wait = 50000;
+	while(1)
+	{
+		if(--wait == 0) // 49999 49998 0
+		{
+			wait = 50000;
+			PORTB = ~PORTB;//0000 0000  11111111 0000 0000 11111111
+		}
+		
+		//read a switch -> 10 msec
+	}
+}
+
+XC8 -> 2 bytes 
+unsigned int -> 0 to 65535
+
+PORTB =   00000001
+          00000011
+		  00000111
+		  00001111
+		  00011111
+		  00111111
+		  01111111
+		  11111111
+		  
+		  0000 0000
+		  0000 0001
+		  0000 0011
+		  0000 0111
+	
+DKP:
+6 tactile sw ->  RB0 - RB5 
+RB0 - RB5 -> input	
+LEVEL Detection: Take action for multiple times -> Volume up 
+Toggle LED at RD0 as long as I have kept SW1[RB0] pressed
+void init_config ()
+{
+	TRISD = 0;//LED at RD0-> OUTPUT
+	PORTD = 0x00 ; //Turn off all 8 LEDs
+	TRISB0 = 1 ;//RB0 -> Input
+}
+
+void main(void)
+{
+	init_config();
+	while(1)
+	{
+		if ( RB0 == 0)//check if sw at R0 is pressed
+		{
+			RD0 = !RD0; 
+			for(unsigned int i = 50000;i--; );
+		}
+	}
+}
+
+
+Edge Detection: As long as sw is pressed, action is taken only for once -> power button
+void init_config ()
+{
+	TRISD = 0;//LED at RD0-> OUTPUT
+	PORTD = 0x00 ; //Turn off all 8 LEDs
+	TRISB0 = 1 ;//RB0 -> Input
+}
+
+void main(void)
+{
+	init_config();
+	char fag = 1;
+	while(1)
+	{
+		if ( RB0 == 0 && flag == 1)//check if sw at R0 is pressed
+		{
+			flag = 0;
+			RD0 = !RD0; 
+		}
+		else if( RB0 == 1)
+		{
+			flag = 1;
+		}
+	}
+}
+
+Configure all 6 switches of DKP. whenever SW1 is pressed, toggle LED1 of PORTD
+
+TRISB =   xxxx xxxx
+        | 0011 1111  -> 0x3F
+		------------
+		  xx11 1111
+		  
+		  
+PORTB ->   			RB7	RB6	RB5	RB4	RB3	RB2	RB1	RB0
+& 0x3F 				0	0	1	1	1	1	1	1
+					--------------------------------
+					0	0	x	x 	x 	x 	x 	x
+			
+PORTB & 0x3F ->		0	0	1	1	1	1	1	1	 -> 0x3F  -> ALL_RELEASED
+					0	0	1	1	1	1	1	0    -> 0x3E  -> SW1
+					0	0	1	1	1	1	0	1	 -> 0x3D  -> SW2
+													 -> 0x3B  -> SW3
+													 -> 0x37  -> SW4
+													 -> 0x2F  -> SW5
+													 -> 0x1F -> SW6
+													 
+main.c
+void init_config()
+{
+	TRISD = 0;//RD0 - RD7 output
+	PORTD = 0x00; //Turn off all 8 LEDs of PORTD
+	init_digital_keypad(); //initalization of DKP
+}
+
+void main(void)
+{
+	init_config();
+	unsigned char key;
+	while(1)
+	{
+		key = read_digital_keypad(LEVEL);
+		if (key == 0x3E )
+		{
+			RD0 = !RD0;
+		}	
+	}
+}
+
+digital_keypad.c
+init_digital_keypad()
+{
+	TRISB = TRISB | 0x3F;
+          //RB0 - RB5 as input 
+}
+#define LEVEL   1
+#define STATE    2
+unsigned char read_digital_keypad (char mode)
+{
+	static char flag = 1;
+	if (mode == LEVEL)
+		return PORTB & 0x3F;
+	else
+	{	
+              if(PORTB & 0x3F != 0x3F  && flag)
+	{
+		flag = 0;
+		return PORTB & 0x3F;
+	} 
+	else if ( PORTB & 0x3F == 0x3F )
+	{
+		flag = 1;
+	}
+	}
+	return ALL_RELEASED
+}
+
+Polling: Monitoring an event on a continuous manner
+
+IVT : Interrupt vector table -> 8051
+		Every source of interrupt will have its own separate isr written.
+		IVT is the table which holds the address of each isr
+		
+		UART		isr_uart() -> 0x00
+		Timer 		isr_timer() -> 0x56
+		ADC 		isr_adc() -> 0x78
+		
+		main()									0x00  -> isr_uart();
+		{
+			while(1)
+			{
+				interrupt_uart;
+			}
+		}
+		
+ISR : Interrupt service routine -> PIC16F877A
+		There will only one isr for every source of interrupt
+		
+		main()								isr()
+		{									{
+			while(1)
+			{
+				interrupt_uart; 
+			}
+		}									}
+		
+dO/don't in ISR
+1. Keep the ISR very simple
+2. Avoid blocking statements
+3. Take care that isr is not consuming much time to execute
+
+while(1)												isr() //2sec
+{														{
+	Timer -> interrupt for every 1 sec
+}														}
+
+Interrupt latency: Time taken to execute the 1st instruction in the interrupt handler from the time	
+					interrupt has occured
+					
+PIC16F877A -> 15 sources of interrupts
+				-> individual interrupt flag bit: every single source will have its own flag bit		
+												set by the uC when the corresponding interrupt occurs
+				-> individual interrupt enable bit: every single source will have its own enable bit
+											set by the programmer when the corresponding iterrupt should be enabled
+				-> global interrupt enable bit: GIE = 1 -> all 15 sources are enabled
+												GIE = 0 -> all 15 sources will be disabled
+												
+External interrupt: 
+	RB0 ->  SW [pull up] -> SW pressed -> falling edge
+	Edge triggered -> INTEDG = 0 
+	INTF will be set to 1 by the uC whenever the external interrupt occurs at RB0 pin
+	INTE is the individual interrupt enable bit which has to be set by the user to enable external interrupt
+	
+Toggle the LED whenever external source of interrupt occurs
+
+main.c
+void init_config(void)
+{
+	init_external_interrupt();
+	TRISD = 0x00;
+	PORTD = 0x00;
+	GIE = 1;
+}
+
+
+void main()
+{
+	init_config();
+	while(1)
+	{
+		;
+	}
+}
+
+external_interrupt.c
+void init_external_interrupt()
+{
+	INTE = 1; // Enable external source of interrupt
+	INTEDG = 0 ; //to inform the uC that external interrupt occurs at falling edge
+}
+
+isr.c
+
+void isr()
+{
+	if (INTF == 1)
+	{
+		RD0 = !RD0;
+		INTF = 0;
+	}
+}
+
+When the sw at RB0 is pressed,
+Falling edge gets identified.
+i.e external interrupt has occured
+uC will set INTF to 1
+then control goes to ISR
+in ISR, check if I came to ISR bcoz od external interrupt
+If true, take action and make INTF = 0
+
+1-> Bad response time, loss of event
+
+SW1 -> External interrupt [Toggle LED1 of PORTD ], SW of DKP [Toggle LED2 of PORTD]
+
+Scalling: Process of delaying the control going to the isr
+	Prescalling:
+		1:1 -> 1 instr -> 200nsec -> 1 tick -> 256 ticks -> interrupt -> 51.2usec
+		1:2 -> 2 instr -> 400nsec -> 1 tick -> 256 ticks -> interrupt -> 102.4usec
+		1:4 -> 4 instr -> 800nsec -> 1 tick -> 256 ticks -> interrupt -> 204.8usec
+		1:8
+		1:16
+		1:32
+		.
+		.
+		.
+		
+	Postscalling:
+		1:1 -> 1 overflow -> interrupt -> 51.2usec
+		1:2 -> 2 overflows -> interrupt -> 102.4usec
+		1:4 -> 4 overflows -> interrupt -> 204.8usec
+		1:16
+		.
+		.
+		.
+		
+LED = 1;
+void main()
+{
+	while(1)
+	{
+		LED = !LED;
+		for(int i = 5000; i--; );
+	}
+}
+
+Timer0:
+	Resolution: 8 bits -> 255
+	Prescalling:
+	Interrupt: overflow from 255 to 0
+	
+	
+Duty cycle: Width of the pulse maintained high
+
+		Duty cycle = Pulse width / pulse period
+				D  = Ton / (Ton + Toff)  * 100
+				
+				Vout = Vmax  * DC
+				
+				D = 0.75 / (0.75 + 0.25) = 0.75
+				Vout = 5V * 0.75 = 3.75V
+				
+1. Builtin block 
+2. Timer
+3. Bit banging
+
+Bit banging:
+
+main()
+{
+	init_config();
+	unsigned int duty_cycle = 50, period = 100, loop_counter = 0;
+	
+	while(1)
+	{
+		if (loop_counter < duty_cycle)
+		{
+			RD0 = 1 ;
+		}
+		else if (loop_counter < period)
+		{
+			RD0 = 0;
+		}
+		if (loop_counter++ == period )
+		{
+			loop_counter = 0;
+		}
+	}
+}
+
+Led dimmer application
+
+Switch -> dkp
+SW1 -> increase Dutycycle
+SW2 -> Decerese the duty_cycle
+
+Duty_cycle = 50, Period = 100
+SW1 -> 
+
+Generate a PWM waveform of 5KHz freq
+Prescale -> 1:4
+PWM Period = [(PR2) + 1] * 4 * TOSC *(TMR2 Prescale Value)
+1/Fpwm = [(PR2) + 1] * 4 * (1/Fosc) *(TMR2 Prescale Value)
+1/5K = [(PR2) + 1] * 4 * (1/20M) *(4)
+PR2 = 249
+
+The CCPR1L contains the eight MSbs and the CCP1CON<5:4> contains the two LSbs. 
+
+PWM Duty Cycle =(CCPR1L:CCP1CON<5:4>) *  TOSC * (TMR2 Prescale Value)
+Assume X = (CCPR1L:CCP1CON<5:4>)
+PWM Duty Cycle =X *  TOSC * (TMR2 Prescale Value)
+D = Ton/ PWM period
+Ton = D * PWM Period
+D * PWM Period =X *  TOSC * (TMR2 Prescale Value)
+D * [(PR2) + 1] * 4 * TOSC *(TMR2 Prescale Value) = X *  TOSC * (TMR2 Prescale Value)
+D/100 * [(PR2) + 1] * 4 = X
+D= 50%
+X = 500 -> 01 1111 0100 
+Write 8 MSbs to CCPR1L register
+CCPR1L = X >> 2; // 00 01 1111 01
+2 LSbs to 5th and 4th bit of CCP1CON
+Get 2 LSB -> X & 0x03
+Bring this to 5th and 4th pos -> ((X & 0x03) << 4)
+Clear the 5th and 4th bit of CCP1CON:  CCP1CON & 0xCF
+CCP1CON = (CCP1CON & 0xCF) | ((X & 0x03) << 4); 
+
+
+
+
+
+0.2msec = 1 pulse
+1sec = ?
+
+LED 
+
+Battery low -> Blink LED for every 0.5 sec
+Engine heated up -> Blink LED for every 1 sec
+
+E1
+E2
+E3
+
+SSD:
+Common cathode: Cathodes of all 8 LEDs are commonly connected to ground
+				To turn on LED of a corresponding segment , provide a 1
+				To turn off LED of a corresponding segment , provide a 0
+				
+Common anode: Anodes of all 8 LEDs are commonly connected to VDD
+				To turn on LED of a corresponding segment , provide a 0
+				To turn off LED of a corresponding segment , provide a 1
+				
+PORTD -> RD7	RD6		RD5		RD4		RD3		RD2		RD1		RD0
+         dp		g 		f 		e 		d 		c 		b 		a
+		 0		0		1		1		1		1		1		1		0x3F  ZERO
+		 0		0		0		0		0		1		1		0       0x06  ONE
+		 0  	1		0 		1		1		0		1		1		0x5B  TWO
+																		0x4F  THREE
+																		0x66  FOUR
+																		
+																			  NINE
+																			  
+8 segments -> 8 individual LED -> PORTD -> RD0 - RD7  has to be output
+Control lines are connected from RA2 -RA5 -> Output
+
+TRISA = xxxx xxxx 
+&		1100 0011 -> 0xC3
+		----------
+		xx00 00xx
+		
+0000
+0001
+0002
+
+9999
+0000
+
+256 bytes -> 0x00 to 0xFF 1 bytes
+'A' to be stores in 0x56 
+EEDAT = 'A';
+EEADR = 0x56
+
+Key up counter
+count upto 9 after every press of SW3. Ovrflow to 0 after reaching 9;
+SW1 -> store the count to EEPROM (0x00)
+SW2 -> restore the data in EEPROM to count
+
+WRITE to eeprom;
+	-> write the data to the register EEDATA
+	-> write the address to the EEADR register
+	extern void eeprom_write(unsigned char addr, unsigned char value);
+	eeprom_write(0x00, 'A');
+Read from eeprom
+	-> specify in which address read has to be done into the EEADR
+	-> read the EEDATA register
+	extern unsigned char eeprom_read(unsigned char addr);
+	ch = eeprom_read(0x00);
+	
+
+CLCD:Character liquid crytal display
+
+LED
+SSD 
+"Oil less"
+"Battery low"
+
+Ways of knowing whether the data given is processed or not
+1. Delay method
+	Open the datasheet of uC builtin in CLCD
+	Has information regading amount of time taken by the uC to process data and to 
+	process instruction
+	Accordingly we provide delay
+	Assume uC of CLCD takes 200nsec for processing data and 400nsec for processing 
+	instruction
+	RS = 1; //tell uC of CLCD that the i/p given will be data
+	print 'A';
+	delay_nsec(200); //delay of 200nsec
+	RS = 0; //tell uC of CLCD that the i/p given will be an instruction
+	Inst: Clear the screen
+	delay_nsec(400);
+2. Polling method: Monitor the D7 pin 
+    Once the data is processed, it makes D7 bit as 0
+	Perform read on D7 bit
+		R/W = 0; //D7 is used by the user for writing
+		RS = 1; //tell uC of CLCD that the i/p given will be data
+		print 'A';
+		R/W = 1; //D7 will be used for reading
+		while(D7 !=0);
+		R/W = 0; //D7 is used by the user for writing
+		RS = 0; //tell uC of CLCD that the i/p given will be an instruction
+		Inst: Clear the screen
+		R/W = 1; //D7 will be used for reading
+		while(D7 !=0);
+
+CLCD 'A' 
+D7 -> RA2 = ('A' >> 7) & 1
+D6 -> RE2 = ('A' >> 6) & 1
+D5 -> RA5 = ('A' >> 5) & 1
+D4 -> RB7
+D3 -> RC2
+D2 -> RD5
+D1 -> RB0
+D0 -> RD7
+
+	RS = 1; //tell uC of CLCD that the i/p given will be data
+	PORTD = 'A';
+	E = 1;
+	small delay
+	E = 0;
+	delay_nsec(200); //delay of 200nsec
+	RS = 0; //tell uC of CLCD that the i/p given will be an instruction
+	Inst: Clear the screen
+	E = 1;
+	small delay
+	E = 0;
+	delay_nsec(400);
+	
+To display 1 char on the CLCD -> clcd_putch()
+To display a string on the CLCD -> clcd_print() 
+
+
+R1		R2		R3		R4		C1		C2		C3	
+RD3		RD2		RD1		RD0		RB0		RB1		RB2
+R1 = 0
+0		1		1		1		0		1		1	 SW1
+0		1		1		1		1		0		1	 SW2
+0		1		1		1		1		1		0	 SW3
+R2 = 0
+1		0		1		1		1		0		1	 SW5
+1		0		1		1		1		1		0	 SW6
+R3 = 0
+1		1		0		1		0		1		1	 SW7
+1		1		0		1		1		0		1	 SW8
+1		1		0		1		1		1		0	 SW9
+R4 = 0
+1		1		1		0		0		1		1	 SW*
+1		1		1		0		1		0		1	 SW0
+1		1		1		0		1		1		0	 SW#
+
+Rows -> RD0 to RD3 -> output -> TRISD = TRISD & 0xF0
+TRISD = XXXX XXXX
+&		1111 0000
+		---------
+		XXXX 0000
+		
+Cols -> RB0 to RB2 -> input -> TRISB = TRISB | 0x07
+TRISB = XXXX XXXX
+|		0000 0111
+		----------
+		XXXX X111
+		
+Msg -> Scrolled
+S1 -> Scroll msg to right
+S2 -> Scroll msg to left
+
+char msg[] = "CLCD_Demo_Code_$";
+
+[0] [1]	[2]	[3]	[4]	[5]	[6]	[7]	[8]	[9]	[10]	[11]	[12]	[13]	[14]	[15]
+ C	 L	 C	 D	 _	 D	 e	 m	 o	 _	  C	     o	     d	     e	      _       $
+
+ $	 c	 L	 C	 D	 _	 D	 e	 m	 o	  _	     C	     o	     d	     e	      _       
+$CLCD_Demo_Code_
+_$CLCD_Demo_Code
+e_$CLCD_Demo_Cod
+
+temp = msg[15];
+for(i = 15 ; i > 0 ; i-- )
+{
+	msg[i] = msg[i - 1];
+}
+msg[0] = temp;
+
+Resolution: Width of the ADC register value
+			8 bits -> 0 - 255
+			10 bits -> 0 to 1023
+Step size: The least voltage which changes the digital value by 1 
+			SS = Input Range / (2 ^ Resolution)
+FSR(Full Scale Resolution): Max voltage which can be converted to the digital value
+Channel: Interface b/w sensors(analog output devices) and ADC
+Aquisition time: Time given to the ADC to understand the analog input given to it
+Convertion Time: Time taken by the ADC to convert analog value to a digital value
+				  after undersanding
+				  
+Potentiometer: Variable Resister
+Resolution: 10 bits -> 0 to 1023
+0V 		->  		0
+2.5V 	-> 			512
+5V		-> 			1023	
+
+POT: > 2.5V -> Turn on LED
+	<2.5V -> Turn off LED
+	
+	POT				ADC			LED
+	> 2.5			> 512		on
+	< 2.5			< 512		off
+	
+SS = Input Range / (2 ^ Resolution) = 5V - 0V / (2 ^ 10 ) = 4.88mV
+adc_reg_value = V / SS  = 2.5V / 4.88mV  = 512.29 = 512 
+
+
+Modes of communication: 
+	Simplex : One way communication. 
+			Eg: Radio , TV
+	Half Duplex: Two way communication. One at a time
+			Eg: Walkie Talkie
+	Full Duplex: Two way communication. Both at same time
+			Eg: Mobile, Telephone
+			
+Types of communication:
+8 bits 1usec
+	Serial						Parallel
+	1 bit at a time				n bits at a time
+	8usec						1usec
+								Hardware complexity
+	Synchronous 					Asynchronous
+    wrt clk							No clk pulse.
+									Trigerring mechanism
+									
+UART -> Intel
+SPI -> Motorola
+I2C -> Philips [NXP]
+CAN -> Robert Bosch
+
+Interboard protocol: 2 chips of different board Eg: UART CAN 
+Intra board protocol: 2 chips of same board Eg: SPI I2C
+
+UART
+
+bit rate = no. of symbols * baud rate 
+
+Baud Rate = FOSC/(16 (X + 1)) 
+X  = (FOSC/ (Baud Rate * 16) ) - 1
+X  = (20M /(9600 * 16) ) - 1 = 129
+
+Receive:
+RC7 -> RSR(8 bit) -> RCREG -> RCIF (1)
+Read RCREG 
+Transmit
+data -> TXREG -> TSR -> TXIF = 1
+
+
+char ch; //  \0
+main()
+{
+	while(1)
+	{
+		if(ch != '\0') //A
+		{
+			putchar(ch);//A
+			ch = '\0' ;
+		}
+	}
+}
+
+extern char ch;
+void isr(void)
+{
+	if(RCIF == 1) //RCREG has data 
+	{
+		ch = RCREG; //A
+		RCIF = 0;
+	}
+}
+
+	Normal											Daisy
+	Point to point communication					No privacy
+	Harware complexity								Less hardware complexity
+	
+	
+Master -> 3 slaves -> normal
+		  temp sensor, External EEPROM , IR sensor
+Master -> 3 slaves -> daisy chain
+		  3 same slaves
+		3 temp sensors 
+		
+I2C:
+SDA -> 1 -> Bus idle condition
+
+Low level of clk : data is written/transmitted
+High level of clk : data is read/received
+Clk high, change of data: special condition
+Clk high, data line falling from high level to low level -> start
+Clk high, data line rising from low level to high level -> stop
+
+Clocking on SCL line:
+Assume 2 masters communicating at the same time 
+uC1(Master)<--------->uC2(slave)
+					  some very imp task
+					  Stretch the clk pulse and keeps it low
+					  
+2 uC start communication at same time
+		uC1 -> 1111 0111
+		uC2 -> 1101 0101
+		SDA -> 110	
+		
+Transmit:
+data -> SSPBUF -> SSPSR -> RC4
+Receive:
+RC3 -> SSPSR -> SSPBUF -> data
+
+ORing R/nW  bit with SEN, RSEN, PEN, RCEN or ACKEN will indicate if the MSSP is in Idle mode
+1 -> Bus is busy
+0 -> bus is idle
+
+R/nW || (SEN, RSEN, PEN, RCEN or ACKEN ) == 1 -> busy
+R/nW || (SSPCON2 & 0x1F) == 1 -> busy 
+R/nW || (SSPCON2 & 0x1F) == 0 -> idle
+
+clock = FOSC/(4 * (SSPADD + 1)) 
+baud =FOSC/(4 * (SSPADD + 1)) 
+(4 * (SSPADD + 1))  = FOSC / baud 
+SSPADD   = (FOSC / (baud * 4)) - 1
+
+ds1307_write(address, value) -> write to the RTC
+ unsigned char ds1307_read(address); -> read from the rtc
+ 
+dummy = ds1307_read(0x00);//know what is stored in the reg -> read reg
+dummy -> xxxx xxxx 
+dummy = dummy & 0x7F;//make MSB 0  -> 0xxx xxxx
+ds1307_write(0x00, dummy); //0xxx xxxx -> CH is made 0 and rest of the bits are retained as it is
+
+being in uC , I have to write a value to the RTC
+ds1307_write(address, value);
+
+7 bit unique address of RTC: 1101 000
+Write -> 0 //1101 0000 -> 0xD0
+read -> 1 //1101 0001 -> 0xD1
+
+void ds1307_write(char address, char data) //0x00 , 0xxx xxxx 
+{
+	i2c_wait_for_idle(); //check if the bus is busy -> waits till bus gets idle
+	i2c_start();//start bit
+	i2c_write(0xD0);//transmit the unique address of RTC + intension(w)
+	i2c_write(address);//transmit the address where data has to be written
+	i2c_write(data);//transmit the data to be written to the specified register
+	i2c_stop();//stop bit
+}
+
+
+unsigned char ds1307_read(char address)
+{
+	i2c_wait_for_idle(); //check if the bus is busy -> waits till bus gets idle
+	i2c_start();//start bit
+	i2c_write(0xD0);//transmit unique address of RTC + intension (W)
+	i2c_write(address);//transmit the address from where the data has to be read
+	i2c_repeat_start();//intension is changed
+	i2c_write(0xD1); //Intension read
+	ch = i2c_read(0/1);//read from buffer register
+	i2c_stop();
+	return ch;
+}
+
+Hour reg -> 0x02 -> 19
+bit7 	bit6	bit5	bit4	bit3	bit2	bit1	bit0
+0		12/24
+0		0		1 Digit of hr	( 2nd digit of hour         )
+0		0		0		1		1		0		0		1    -> clock_reg[0]
+1st digit of hour time[0]-> (clock_reg[0] >> 4 ) & 0x03 + '0'
+2nd digit of hour time[1]-> (clock_reg[0] & 0x0F )+ '0'
+
+clock_reg[1] -> min -> 56
+0  	1	0	1	0	1	1	0
+
+CAN:
+Data frame: data to be transmitted -> made of 7 fields
+Start of the frame(1) + Arbitration(12/32) + Control(6) + Data(0 - 64) + CRC(16) + Ack(2) + EOF(7)
+      0
+Arbitration -> 11 bits of identifier + RTR(Remote transmission request 0 -> write, 1 -> read)
+Control -> IDE/r1	r0	DLC3	DLC2	DLC1	DLC0
+			0(std)		0		0		1		0		-> 2bytes
+						0		1		0		0		-> 4 bytes
+						
+Standard data frame:
+ 0(SOF)  + 11(Identifier) + 0(RTR) + (0)IDE + r0 + DLC3 - DLC0 + data + crc + ack+ eof
+ 
+Extended data frame:
+0(SOF) + 11(Identifier) + 1(SRR) + 1(IDE) + 18(Extended identifier) + 0(RTR) + r1  +r0  + dlc3 - dlc0
++data + crc + ack +  eof
+Transmit error counter or Receive error counter is lesser than 128 (0 to 127) -> Active
+Transmit error counter or Receive error counter is greater than 127 and less than 256 (128 - 255) -> Passive
+Transmit error counter or Receive error counter is greter than 255 -> bus off
+
+
+Car black box:
+	1. Default screen
+	2. Login screen
+	3. Menu screen
+			a. View log
+			b. Clear log
+			c. Download log
+			d. Change passwd
+			e. Set time
+
+set a system password: store the system password in 1st 4 bytes of external eeprom			
+1. Default/Dashboard screen: -> basic screen to be displayed when system is turned on
+								Change of event should be recorded
+								Time    	Event   Speed
+								19:30:45	ON		  0
+								19:31:45	GN		  0
+								19:32:26	G1 		  20
+								19:36:33	G2 		  35
+								.
+								.
+								.
+								.
+								
+Events: ON, GN, G1, G2, G3, G4, GR, C
+			TIME   			Event    Speed
+			19:30:45		  ON		0
+		List of periperal:
+		1. clcd
+		2. Potentiometer -> vary the speed (0 to 99)
+		3. DKP -> change events  SW1 -> C , SW2 -> up gear, SW3 -> down gear
+		4. External EEPROM : -> store the change of events -> I2C protocol
+		
+2. Login screen: 
+
+		To go to the login screen from default screen, press sw4/sw5 of DKP
+		-> 1st line should display "Enter password"
+		-> 2nd line, promt the user -> blink the cursor for every half a second
+		-> user has to enter the password -> using 2 keys of DKP -> sw4/sw5
+		-> password should be of length 4
+		-> display * while user is entering the password
+		-> max number of attempts given are 3
+		-> compare the user entered password with system password
+		-> if the user password and system password are same -> move to next screen -> menu screen
+		-> if the user password and system password are not same
+				reduce the number of attempts
+				if(number of attempts < max number of attempts)
+						give a chance for another attempt
+				else
+						lock the user for 15 min
+		-> if password is entered partially and more time is taken -> go to the default screen
+				
+		List of periperals: 
+		1. DKP : to enter the login screen from default screen and to enter the user password
+		2. CLCD
+		3. Timer 
+		
+3. Menu screen: 
+SW4/SW5 -> scroll the menu
+		Long press a sw5 -> enter the subscreen
+		Long press sw4 -> come back to main menu
+			a. View log
+					-> display the logs stored in external eeprom
+					sl time 		event speed
+					1  12:45:36		ON 		0
+			b. Clear log
+					delete the data written the external eeprom
+			c. Download log
+					Display all logs
+			d. Change passwd
+					Read new password
+			e. Set time
+					
